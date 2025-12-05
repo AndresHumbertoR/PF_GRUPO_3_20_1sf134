@@ -1,0 +1,120 @@
+DROP DATABASE flavor;	
+CREATE DATABASE flavor;
+USE flavor
+
+CREATE TABLE usuarios(
+	id int(11),
+	nombre varchar(255),
+	apellido varchar(255),
+	fecha_nac varchar(255),		
+	genero varchar(255),		
+	correo varchar(255),
+	contrasennia varchar(255),
+	telefono varchar(255),
+	PRIMARY KEY (id)
+	
+);
+CREATE TABLE restaurantes(
+	id int,
+	nombre varchar(255),
+	tipo_restaurante varchar(255),
+	tipo_comida varchar(255),	
+	costo varchar(255),			
+	email varchar(255),
+	sitio_web varchar(255),
+	tiene_menu_ninnios varchar(255),
+	tiene_silla_bebe varchar(255),
+	tiene_cambiador varchar(255),
+	tiene_parking varchar(255),	
+	accesibilidad_discapacitados varchar(255),
+	PRIMARY KEY (id)
+);
+CREATE TABLE sucursales(
+	id int(11),
+	id_restaurante int(11),			
+	provincia varchar(255),
+	direccion varchar(255),
+	dia_apertura varchar(255),
+	dia_cierre varchar(255),
+	hora_apertura varchar(255),
+	hora_cierre varchar(255),
+	telefono varchar(255),
+	reservas_por_hora int(11),
+	PRIMARY KEY (id),
+	FOREIGN KEY (id_restaurante) REFERENCES restaurantes(id)
+);
+CREATE TABLE reservas(
+	id int(11),
+	id_usuario int(11),				
+	id_sucursal int(11),			
+	fecha varchar(255),			
+	hora varchar(255),			
+	numero_personas varchar(255),
+	comentario varchar(255),	
+	sillas_ninnios varchar(255),
+	PRIMARY KEY (id),
+	FOREIGN KEY (id_usuario) REFERENCES usuarios(id),
+	FOREIGN KEY (id_sucursal)REFERENCES sucursales(id)
+);
+CREATE TABLE fotos_restaurantes(
+	nombre varchar(255), (nombre de la foto guardado en assets)
+	id_restaurante int(11),
+	PRIMARY KEY (nombre),
+	FOREIGN KEY (id_restaurante) REFERENCES restaurantes(id)
+);
+CREATE TABLE platos(
+	nombre varchar(255),
+	descripción varchar(255),
+	precio varchar(255),
+	nombre_foto varchar(255),
+	id_restaurante int(11),
+	PRIMARY KEY (nombre),
+	FOREIGN KEY (id_restaurante) REFERENCES restaurantes(id)
+);
+
+USE flavor
+INSERT INTO restaurantes (nombre,tipo_restaurante,tipo_comida,costo,email,sitio_web,tiene_menu_ninnios,tiene_silla_bebe,tiene_cambiador,tiene_parking,accesibilidad_discapacitados) 
+VALUES 
+("tacos locos","Restaurante","Mexicana","Barato","eaml@1","siti1. net","si","si","si","si","si"),
+("sabor darienita","Fonda","Panameña","Barato","eaml@2","siti2. net","no","si","no","si","no"),
+("route 66","Bar","Americana","Caro","eaml@3","siti3. net","si","si","no","si","si"),
+("puerto caribe","Restaurante","Panameña","Barato","eaml@4","siti4. net","no","si","no","si","si"),
+("el dragon dorado","Buffet","China","Caro","eaml@5","siti5. net","si","si","si","no","no"),
+("cafe la perla","Cafetería","Italiana","Caro","eaml@6","siti6. net","si","no","no","si","no");
+INSERT INTO sucursales (id_restaurante,provincia,direccion,dia_apertura,dia_cierre,hora_apertura,hora_cierre,telefono,reservas_por_hora) 
+VALUES 
+(1,"Panamá","dirección1","martes","domingo","0900","2200","1233-1413",6),
+(2,"Darién","dirección2","martes","domingo","0900","2200","avc-3232",5),
+(3,"Herrera","dirección3","martes","domingo","0900","2200","3252-3442",7),
+(4,"Veraguas","dirección4","martes","domingo","0900","2200","6643-3452",8),
+(5,"Chiriquí","dirección5","martes","domingo","0900","2200","7457-4365",3),
+(6,"Coclé","dirección6","martes","domingo","0900","2200","3456-3646",5);
+INSERT INTO platos
+VALUES 
+("Nmex1","descripcion1","10.00","tacos-locos-plato1",1),
+("Nmex2","descripcion1","30.00","tacos-locos-plato2",1),
+("Ndar1","descripcion2","20.00","sabor-darienita-plato2",2),
+("Ndar2","descripcion2","5.00","sabor-darienita-plato1",2),
+("Nam1","descripcion3","2.00","route-66-plato3",3),
+("Nam2","descripcion3","9.00","route-66-plato4",3),
+("Ncar1","descripcion4","7.00","puerto-caribe-plato4",4),
+("Ncar2","descripcion4","8.00","puerto-caribe-plato5",4),
+("Nchi1","descripcion5","10.00","el-dragon-dorado-plato3",5),
+("Nchi2","descripcion5","11.00","el-dragon-dorado-plato4",5),
+("Ncaf1","descripcion6","12.00","cafe-la-perla-plato1",6),
+("Ncaf2","descripcion6","16.00","cafe-la-perla-plato2",6)
+;
+INSERT INTO fotos_restaurantes 
+VALUES 
+("tacos-locos-home",1),
+("tacos-locos2",1),
+("sabor-darienita-home",2),
+("sabor-darienita1",2),
+("route-66-saloon-home",3),
+("route-66-saloon3",3),
+("puerto-caribe-home1",4),
+("puerto-caribe-home2",4),
+("el-dragon-dorado2",5),
+("el-dragon-dorado1",5),
+("cafe-la-perla3",6),
+("cafe-la-perla-home",6);
