@@ -1,10 +1,28 @@
+<?php
+  // Inicia la sesión
+  session_start();
+
+  // Incluye el archivo que contiene la conexión a la base de datos
+  include "../src/php/conexion_bd.php";
+  // Incluye el archivo que contiene el modelo de la base de datos
+  include "../src/php/modelo_bd.php";
+
+  // Verifica si no hay un usuario autenticado
+  if(empty($_SESSION["id_usuario"])){
+    // Redirige a la página de inicio de sesión si no hay un usuario autenticado
+    header("Location: login.php");
+    // Detiene la ejecución del script después de la redirección
+    exit();
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="authors" content="Eduardo Sequeira, Virgilio Peff, Andrés Rodríguez y Cristopher Quintero" />
+    <meta name="authors" content="Andrés Rodríguez, Eduardo Sequeira, Virgilio Peff, Christophet Quintero />
     <meta name="description" content="Página para modificar una reserva" />
     <title>Modificar reserva - Flavor Hunt</title>
     <link rel="stylesheet" href="../style/main.css" />
@@ -74,7 +92,13 @@
         <h2 id="titulo-modify-reservation" >Modificar reserva</h2>
 
         <!-- Formulario modificar reserva restaurante -->
-        
+        <?php
+          // Llama a la función consultarReserva()
+          consultarReserva();
+          
+          // Llama a la función modificarReserva()
+          modificarReserva();
+        ?>
       </section>
     </main>
 
@@ -105,7 +129,7 @@
         </nav>
 
         <!-- Mensaje de copy right  -->
-        <h4>Flavor Hunt &COPY; 2023 | Privacy policy</h4>
+        <h4>Flavor Hunt &COPY; 2025 | Privacy policy</h4>
 
         <!-- Enlace para cerrar sesión -->
         <p id="boton-cerrarsesicon"><a href="./destroy_session.php">Cerrar sesión</a></p>
