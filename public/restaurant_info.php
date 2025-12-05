@@ -1,10 +1,38 @@
+<?php
+  // Inicia la sesión
+  session_start();
+
+  // Incluye el archivo que contiene la conexión a la base de datos
+  include "../src/php/conexion_bd.php";
+  // Incluye el archivo que contiene el modelo de la base de datos
+  include "../src/php/modelo_bd.php";
+
+  function obtenerFechaMinima() {
+    // Crea un objeto DateTimeZone para la zona horaria de América/Panamá
+    $zonaHorariaPanama = new DateTimeZone('America/Panama');
+    // Crea un objeto DateTime con la fecha y hora actuales en la zona horaria de América/Panamá
+    $fechaMinima = new DateTime('now', $zonaHorariaPanama);
+
+    // Devuelve la fecha formateada como 'Y-m-d'
+    return $fechaMinima->format('Y-m-d');
+  }
+
+  // Verifica si no hay un usuario autenticado
+  if(empty($_SESSION["id_usuario"])){
+    // Redirige a la página de inicio de sesión si no hay un usuario autenticado
+    header("Location: login.php");
+    // Detiene la ejecución del script después de la redirección
+    exit();
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
+    <meta name="authors" content="Andrés Rodríguez, Eduardo Sequeira, Virgilio Peff, Christophet Quintero />
     <meta name="description" content="Página para consultar la información de un restaurante" />
     <title>Información del restaurante - Flavor Hunt</title>
     <link rel="stylesheet" href="../style/main.css" />
@@ -255,7 +283,7 @@
                           id="comment"
                           cols="35"
                           rows="4"
-                        ></textarea>
+                        ><?php if($_POST){if(!empty($_POST['txtReservationComment']) || trim($_POST['txtReservationComment'])!==""){echo $_POST['txtReservationComment'];}else{echo '';}} ?></textarea>
                       </p>
 
                       <p class="block-grid">
@@ -309,4 +337,3 @@
     </footer>
   </body>
 </html>
-
