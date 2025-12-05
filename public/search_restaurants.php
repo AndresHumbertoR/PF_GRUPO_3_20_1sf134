@@ -1,10 +1,34 @@
+<?php
+  // Inicia la sesión
+  session_start();
+
+  // Incluye el archivo que contiene la conexión a la base de datos
+  include "../src/php/conexion_bd.php";
+  // Incluye el archivo que contiene el modelo de la base de datos
+  include "../src/php/modelo_bd.php";
+
+  // Captura los valores del formulario de filtros
+  $txt_tipoComida=(isset($_POST["txtFoodType"]))?$_POST["txtFoodType"]:"";
+  $txt_provincia=(isset($_POST["txtProvince"]))?$_POST["txtProvince"]:"";
+  $txt_costo=(isset($_POST["txtCost"]))?$_POST["txtCost"]:"";
+  $txt_facilidades=(isset($_POST["txtFacilities"]))?$_POST["txtFacilities"]:"";
+
+  // Verifica si no hay un usuario autenticado
+  if(empty($_SESSION["id_usuario"])){
+    // Redirige a la página de inicio de sesión si no hay un usuario autenticado
+    header("Location: login.php");
+    // Detiene la ejecución del script después de la redirección
+    exit();
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
+    <meta name="authors" content="Andrés Rodríguez, Eduardo Sequeira, Virgilio Peff, Christophet Quintero />
     <meta name="description" content="Página para buscar restaurantes" />
     <title>Buscar restaurantes - Flavor Hunt</title>
     <link rel="stylesheet" href="../style/main.css" />
@@ -431,4 +455,3 @@
     </footer>
   </body>
 </html>
-
