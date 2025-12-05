@@ -1,10 +1,18 @@
+<?php
+  // Incluye el archivo que contiene la conexión a la base de datos
+  include "../src/php/conexion_bd.php";
+  // Incluye el archivo que contiene el modelo de la base de datos
+  include "../src/php/modelo_bd.php";
+?>
+
+
 <!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
+    <meta name="authors" content="Andrés Rodríguez, Eduardo Sequeira, Virgilio Peff, Christophet Quintero />
     <meta name="description" content="Página para el registro de usuario" />
     <title>Crear una cuenta - Flavor Hunt</title>
     <link rel="stylesheet" href="../style/main.css" />
@@ -49,10 +57,10 @@
               name="txtName"
               id="name"
               autocomplete="off"
+              placeholder="Ingrese su primer nombre"
               required
               autofocus
-              value=""
-              placeholder="Ingrese su nombre"
+              value="<?php if($_POST){echo $_POST['txtName'];} ?>"
             />
           </p>
 
@@ -63,9 +71,9 @@
               name="txtLastName"
               id="last-name"
               autocomplete="off"
+              placeholder="Ingrese su primer apellido"
               required
-              value=""
-              placeholder="Ingrese su apellido"
+              value="<?php if($_POST){echo $_POST['txtLastName'];} ?>"
             />
           </p>
 
@@ -80,8 +88,8 @@
             <label for="gender">Género</label>
             <select name="txtGender" id="gender" required>
               <option value="" disabled selected>Elige una opción</option>
-              <option value="Masculino" <?php if($_POST){if($_POST['txtGender']==='Masculino'){?> Masculino</option>
-              <option value="Femenino" <?php if($_POST){if($_POST['txtGender']==='Femenino'){?> Femenino</option>
+              <option value="Masculino" <?php if($_POST){if($_POST['txtGender']==='Masculino'){?> selected <?php }} ?>>Masculino</option>
+              <option value="Femenino" <?php if($_POST){if($_POST['txtGender']==='Femenino'){?> selected <?php }} ?>>Femenino</option>
             </select>
           </p>
         </fieldset>
@@ -96,10 +104,10 @@
               type="email"
               name="txtEmail"
               id="email"
+              placeholder="Ingrese su cuenta de correo ej.: corre@gmail.com"
               autocomplete="off"
               required
-              value=""
-              placeholder="Ej: 'correo@direccion.com'"
+              value="<?php if($_POST){echo $_POST['txtEmail'];} ?>"
             />
           </p>
 
@@ -109,11 +117,10 @@
               type="tel"
               name="txtPhone"
               id="phone"
-              placeholder="55555555"
-              pattern="[0-9]{8}"
+              placeholder="Ingrese su numero de telefono o celular ej.: 6754903"
+              pattern="[0-9]{7-8}"
               required
-              value=""
-             
+              value="<?php if($_POST){echo $_POST['txtPhone'];} ?>"
             />
           </p>
 
@@ -123,10 +130,10 @@
               type="password"
               name="txtPassword"
               id="password"
+              placeholder="Ingrese su contraseña preferida"
               autocomplete="off"
               required
-              value=""
-              placeholder="Cree una contraseña"
+              value="<?php if($_POST){echo $_POST['txtPassword'];} ?>"
             />
           </p>
 
@@ -138,8 +145,7 @@
               id="confirm-password"
               autocomplete="off"
               required
-              value=""
-              placeholder="Copiee contraseña"
+              value="<?php if($_POST){echo $_POST['txtConfirmPassword'];} ?>"
             />
           </p>
         </fieldset>
@@ -151,4 +157,3 @@
     </div>
   </body>
 </html>
-
