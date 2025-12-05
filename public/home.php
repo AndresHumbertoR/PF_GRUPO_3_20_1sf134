@@ -1,9 +1,30 @@
+
+
+<?php
+  // Inicia la sesión
+  session_start();
+
+  // Incluye el archivo que contiene la conexión a la base de datos
+  include "../src/php/conexion_bd.php";
+  // Incluye el archivo que contiene el modelo de la base de datos
+  include "../src/php/modelo_bd.php";
+
+  // Verifica si no hay un usuario autenticado
+  if(empty($_SESSION["id_usuario"])){
+    // Redirige a la página de inicio de sesión si no hay un usuario autenticado
+    header("Location: login.php");
+    // Detiene la ejecución del script después de la redirección
+    exit();
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="authors" content="Andrés Rodríguez, Eduardo Sequeira, Virgilio Peff, Christophet Quintero />
     <meta name="description" content="Página de home de la aplicación" />
     <title>Home - Flavor Hunt</title>
     <link rel="stylesheet" href="../style/main.css" />
@@ -44,7 +65,7 @@
             <li><a href="search_restaurants.php?tipo_restaurante=Buffet">BUFFETS</a></li>
             <li><a href="reservation_info.php">CONSULTAR RESERVAS</a></li>
           </ul>
-        </div>
+        </div><!-- Lista superior de elementos  -->
         <i class="fa-solid fa-bars" onclick="showMenu()"></i>
       </nav>
 
@@ -53,9 +74,9 @@
 
         <p>Explora los Sabores de Panamá: Los Restaurantes Más Emblemáticos <br> en un Solo Sitio
         </p>
-      </div>
+      </div><!--banner-->
 
-      <!-- JAVASCRIPT -->
+      <!-- JAVASCRIPT : encoje la barra de navegació-->
       <script>
         var navLinks = document.getElementById("navLinks");
 
@@ -76,7 +97,10 @@
         <h2>Restaurantes en la ciudad de Panamá</h2>
 
         <div class="row">
-            
+            <?php
+              // Llama a la función buscarRestaurantesCiudadPanama()
+              buscarRestaurantesCiudadPanama();
+            ?>
         </div>
       </section>
 
@@ -85,13 +109,19 @@
         <h2>Restaurantes con comida local</h2>
 
         <div class="row">
-          
+          <?php
+            // Llama a la función buscarRestaurantesComidaLocal()
+            buscarRestaurantesComidaLocal();
+          ?>
         </div>
       </section>
 
       <!-- Banner de los restaurantes más elegantes -->
       <section class="banner-home">
-    
+        <?php
+          // Llama a la función buscarRestaurantesElegantes()
+          buscarRestaurantesElegantes();
+        ?>
       </section>
 
       <!-- Seccion de restaurantes economicos -->
@@ -99,7 +129,10 @@
         <h2>Restaurantes económicos</h2>
 
         <div class="row">
-
+          <?php
+            // Llama a la función buscarRestaurantesEconomicos()
+            buscarRestaurantesEconomicos();
+          ?>
         </div>
       </section>
     </main>
@@ -138,5 +171,4 @@
       </div>
     </footer>
   </body>
-
 </html>
