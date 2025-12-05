@@ -1,10 +1,20 @@
+<?php
+  // Inicia la sesión
+  session_start();
+
+  // Incluye el archivo que contiene la conexión a la base de datos
+  include "../src/php/conexion_bd.php";
+  // Incluye el archivo que contiene el modelo de la base de datos
+  include "../src/php/modelo_bd.php";
+?>
+
 <!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <meta name="authors" content="Andrés Rodríguez, Eduardo Sequeira, Virgilio Peff, Christophet Quintero />
     <meta name="description" content="Página para el inicio de sesión" />
     <title>Inicio de sesión - Flavor Hunt</title>
     <link rel="stylesheet" href="../style/main.css">
@@ -25,7 +35,10 @@
   </head>
 
   <body>
-    
+    <?php
+      // Llama a la función iniciarSesion()      
+      iniciarSesion();
+    ?>
     
     <!-- Contenedor del inicio de sesión -->
     <div id="login-container">
@@ -45,8 +58,7 @@
               autocomplete="off"
               required
               autofocus
-              value=""
-              placeholder="Ej: 'correo@direccion.com'"
+              value="<?php if($_POST){echo $_POST['txtEmail'];} ?>"
             />
           </p>
 
@@ -58,8 +70,7 @@
               id="password"
               autocomplete="off"
               required
-              value=""
-              placeholder="Ingrese su contraseña"
+              value="<?php if($_POST){echo $_POST['txtPassword'];} ?>"
             />
           </p>
         </fieldset>
@@ -82,4 +93,3 @@
 
   </body>
 </html>
-
