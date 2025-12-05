@@ -1,10 +1,17 @@
+<?php
+  // Incluye el archivo que contiene la conexión a la base de datos
+  include "../src/php/conexion_bd.php";
+  // Incluye el archivo que contiene el modelo de la base de datos
+  include "../src/php/modelo_bd.php";
+?>
+
 <!DOCTYPE html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="authors" content="Virgilio Peff, Andrés Rodríguez, Eduardo Sequeira, Cristopher Quintero" />
+    <meta name="authors" content="Andrés Rodríguez, Eduardo Sequeira, Virgilio Peff, Christophet Quintero />
     <meta name="description" content="Página para reestablecer la contraseña" />
     <title>Reestablecer contraseña - Flavor Hunt</title>
     <link rel="stylesheet" href="../style/main.css">
@@ -24,7 +31,10 @@
     <link rel="stylesheet" href="../style/alerta.css" />
   </head>
   <body>
-  
+    <?php
+      // Llama a la función cambiarContrasennia()
+      cambiarContrasennia();
+    ?>
     <!-- Contenedor del reestablecimiento de contraseña -->
     <div id="forgot-password-container">
       <!-- Formulario de reestablecimiento de contraseña  -->
@@ -42,7 +52,6 @@
               autocomplete="off"
               required
               autofocus
-              placeholder="Ej: 'correo@direccion.com'"
             />
           </p>
 
@@ -54,7 +63,6 @@
               id="new-password"
               autocomplete="off"
               required
-              placeholder="Ingrese nueva contraseña"
             />
           </p>
 
@@ -66,7 +74,6 @@
               id="confirm-new-password"
               autocomplete="off"
               required
-              placeholder="Repita nueva contraseña"
             />
           </p>
         </fieldset>
@@ -85,4 +92,3 @@
 
   </body>
 </html>
-
